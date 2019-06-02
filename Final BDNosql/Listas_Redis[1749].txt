@@ -1,0 +1,55 @@
+
+
+//Para la lista 3 -- tipo=1= Administrador  =2=Registrador
+//Por cada kilo un  costo de 90000
+//Lista 1: codigoPaquete  “NombresRemitente”  cedula  edad  telefono  “NombreDestinatario” cedula   edad   teléfono   “Fechaentrega”   peso   costo  origen destino “FechaEstimada”
+
+rpush 10001 "Ana Ramirez" 22200001 45 3202086111 "Mateo Sánchez" 22200002 28 3742087711 "30/10/2017 14:14" 2 180000
+rpush 10002 "María Pérez" 22200003 18 3904476210 "Adriana Farje" 22200004 23 3992087803 "05/11/2017 9:00" 1 90000
+rpush 10003 "Bruna Morillo" 22200005 21 3404474210 "Christian Changa" 22200006 22 3912000803 "06/11/2017 13:30" 1.5 135000
+rpush 10004 "Gianella Urday" 22200007 19 3254994240 "Ariadna Raffo" 22200008 21 3442016606 "09/11/2017 10:45" 0.5 45000
+rpush 10005 "Renato Perez" 22200009 22 3125499232 "Piero Bardelli" 22200010 23 3942045706 "14/11/2017 7:00" 1 90000
+rpush 10006 "Andre Chavez" 22200011 24 3887469232 "Flavia Prado" 22200012 20 3711045776 "14/11/2017 16:15" 1.4 126000
+
+//Lista 2:  codigo    “estado”    “Observación”   “fechaActual”
+rpush estado:10001 "Titan Plaza" "Retenido por peso permitido" "31/10/2017 8:00" "Tital Plaza" "Salio de oficinas" "31/10/2017 11:20"
+rpush estado:10002 "Simon bolivar" "Paquete maltratado" "06/11/2017 10:10"
+rpush estado:10003 "Caller 45a" "En observacion" "06/11/2017 16:45" "Calle 45a" "Retenido" "06/11/2017 18:31"
+rpush estado:10004 "Carrera 13" "Sale de oficinas" "10/11/2017 7:15" "Candelaria" "Conforme" "10/11/2017 14:00"
+
+//Lista 3: username  “NombreCompleto”   correo   password   tipo
+rpush mateo123 "Mateo Pérez" "jperes23@ucatolica.edu.co" "Redis12" 1
+rpush marcos01 "Marcos Andrade" "mandrade12@ucatolica.edu.co" "Redis11" 2
+
+
+--------------------------
+con hashes
+
+//Lista 1 codigoPaquete  “NombresRemitente”  cedula  edad  telefono  “NombreDestinatario” cedula2   edad2   teléfono2  Fechaentrega   peso   origen   destino  costo  “fechaEstimada”
+hmset 10001 NombresRemitente "Ana Ramirez" cedula 22200001 edad 45 telefono 3202086111 NombreDestinatario "Mateo Sánchez" cedula2 22200002 edad2 28 telefono2 3742087711 Fechaentrega "30/10/2017 14:14" peso 2 origen 1 destino 4 costo 180000 fechaEstimada "5/11/2017"
+hmset 10002 NombresRemitente "María Pérez" cedula 22200003 edad 18 telefono 3904476210 NombreDestinatario "Adriana Farje" cedula2 22200004 edad2 23 telefono2 3992087803 Fechaentrega "05/11/2017 9:00" peso 1 origen 4 destino 2 costo 90000 fechaEstimada "7/11/2017"
+hmset 10003 NombresRemitente "Bruna Morillo" cedula 22200005 edad 21 telefono 3404474210 NombreDestinatario "Christian Changa" cedula2 22200006 edad2 22 telefono2 3912000803 Fechaentrega "06/11/2017 13:30" peso 1.5 origen 1 destino 2 costo 135000 fechaEstimada "21/11/2017"
+hmset 10004 NombresRemitente "Gianella Urday" cedula 22200007 edad 19 telefono 3254994240 NombreDestinatario "Ariadna Raffo" cedula2 22200008 edad2 21 telefono2 3442016606 Fechaentrega "09/11/2017 10:45" peso 0.5 origen 3 destino 2 costo 45000 fechaEstimada "10/11/2017"
+hmset 10005 NombresRemitente "Renato Perez" cedula 22200009 edad 22 telefono 3125499232 NombreDestinatario "Piero Bardelli" cedula2 22200010 edad2 23 telefono2 3942045706 Fechaentrega "14/11/2017 7:00" peso 1 origen 5 destino 1 costo 90000 fechaEstimada "20/11/2017"
+hmset 10006 NombresRemitente "Andre Chavez" cedula 22200011 edad 24 telefono 3887469232 NombreDestinatario "Flavia Prado" cedula2 22200012 edad2 20 telefono2 3711045776 Fechaentrega "14/11/2017 16:15" peso 1.4 origen 3 destino 8 costo 126000 fechaEstimada "21/11/2017"
+
+//Lista 2:  codigo    “estado”    “Observación”   “fechaActual”
+rpush estado:10001 "Titan Plaza" "Retenido por peso permitido" "31/10/2017 8:00" "Tital Plaza" "Salio de oficinas" "31/10/2017 11:20"
+rpush estado:10002 "Simon bolivar" "Paquete maltratado" "06/11/2017 10:10" "Calle 54" "Aprobado" "08/11/2017 10:10"
+rpush estado:10003 "Caller 45a" "En observacion" "06/11/2017 16:45" "Calle 45a" "Retenido" "06/11/2017 18:31"
+rpush estado:10004 "Carrera 13" "Sale de oficinas" "10/11/2017 7:15" "Candelaria" "Conforme" "10/11/2017 14:00"
+
+
+//Lista 3: username  “NombreCompleto”   correo   password   tipo
+hmset mateo123 NombreCompleto "Mateo Pérez" correo "jperes23@ucatolica.edu.co" password "Redis12" tipo 1
+hmset marcos01 NombreCompleto "Marcos Andrade" correo "mandrade12@ucatolica.edu.co" password "Redis11" tipo 2
+
+
+
+
+
+10001 NombresRemitente "Ana Ramirez" cedula 22200001 edad 45 telefono 3202086111 NombreDestinatario "Mateo Sánchez" cedula2 22200002 edad2 28 telefono2 3742087711 Fechaentrega "30/10/2017 14:14" peso 2 costo 180000  chapinero santa Fe "1/11/2017 14:10"
+rpush estado:10001 "Titan Plaza" "Retenido por peso permitido" "31/10/2017 8:00" "Tital Plaza" "Salio de oficinas" "31/10/2017 11:20"  canderla "x razones" 7/11/2017
+
+
+10001 NombresRemitente "Ana Ramirez" cedula 22200001 edad 45 telefono 3202086111 NombreDestinatario "Mateo Sánchez" cedula2 22200002 edad2 28 telefono2 3742087711 Fechaentrega "30/10/2017 14:14" peso 2 costo 180000  chapinero santa Fe 4/11/2017 
